@@ -1,22 +1,29 @@
 var ViewModel = function() {
-    this.ceilingHeight = ko.observable(3);
-    var velocityLookup = {
-        '3': 500,
-        '4': 600,
-        '5': 650,
-        '6': 700,
-        '7': 750 
-    };
+    this.ceilingOptions = [
+        { value: 3, fpm: 500 },
+        { value: 4, fpm: 600 },
+        { value: 5, fpm: 650 },
+        { value: 6, fpm: 700 },
+        { value: 7, fpm: 750 }
+    ];
+    this.ceilingHeight = ko.observable(this.ceilingOptions[0]);
+    this.ceilingText = function (item) { return item.value + ' m'; };
+    
     this.velocity = ko.observable(500);
     var computedVelocity = ko.computed(function ()
     {
-        var ceilingHeight = Math.floor(this.ceilingHeight());
-        var velocity = velocityLookup[ceilingHeight];
-        this.velocity(velocity);
+        var ceilingHeight = this.ceilingHeight();
+        this.velocity(ceilingHeight.fpm);
     }, this);
 
     this.area = ko.observable(5);
-    this.areaUnit = ko.observable('m2');
+    this.areaOptions = Array
+        .apply(null, {length: 46})
+        .map(Number.call, function (item)
+        {
+            return item + 5;
+        });
+    this.areaText = function (item) { return item + ' m2'; };
 
     this.energyBtu = ko.observable();
     this.energyCFM = ko.pureComputed(function ()
@@ -27,22 +34,9 @@ var ViewModel = function() {
     var computedEnergy = ko.computed(function ()
     {
         var area = this.area();
-        var multiplier = this.areaUnit() === 'm2' ? 600 : 195;
-        this.energyBtu(area * multiplier);
+        var height = this.ceilingHeight().value;
+        this.energyBtu(area * height * 195);
     }, this);
-};
-
-ko.bindingHandlers.sliderValue = {
-    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-        var field = valueAccessor();
-        $(element).slider().on('slide', function (data)
-        {
-            field(data.value);
-        });
-    },
-    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-        $(element).slider('setValue', ko.unwrap(valueAccessor()));
-    },
 };
  
 ko.applyBindings(new ViewModel());

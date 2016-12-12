@@ -13,7 +13,6 @@
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="/bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -36,9 +35,8 @@
     <form class="form-horizontal">
       <div class="form-group">
         <label for="inputCeiling" class="col-sm-3 control-label">Ceiling (m)</label>
-        <div class="col-sm-4">
-          <input type="text" name="inputCeiling" id="inputCeiling" data-provide="slider" data-slider-ticks="[3,7]" data-slider-ticks-labels='["3m","7m"]'
-            data-slider-min="2" data-slider-max="10" data-slider-step="0.5" data-bind="sliderValue: ceilingHeight">
+        <div class="col-sm-3">
+          <select class="form-control" id="inputCeiling" data-bind="options: ceilingOptions, value: ceilingHeight, optionsText: ceilingText"></select>
         </div>
       </div>
       <div class="form-group">
@@ -52,26 +50,10 @@
       </div>
 
       <div class="form-group">
-        <label for="inputArea" class="col-sm-3 control-label">Area</label>
-        <div class="col-sm-4">
-          <input type="text" name="inputArea" id="inputArea" data-provide="slider" data-slider-ticks="[5,10,20,30,50]" data-slider-ticks-labels='["5","10","20","30","50"]'
-            data-slider-min="2" data-slider-max="10" data-slider-step="0.5" data-bind="sliderValue: area">
+        <label for="inputArea" class="col-sm-3 control-label">Area (m2)</label>
+        <div class="col-sm-3">
+          <select class="form-control" id="inputArea" data-bind="options: areaOptions, value: area, optionsText: areaText"></select>
         </div>
-        <label>
-            <input type="radio" name="options" id="squareMeter" value="m2" data-bind="checked: areaUnit">m2
-          </label>
-          <label>
-            <input type="radio" name="options" id="cubicMeter" value="m3" data-bind="checked: areaUnit">m3
-          </label>
-
-        <!--<div class="btn-group col-sm-2" data-toggle="buttons">
-          <label class="btn btn-primary active">
-            <input type="radio" name="options" id="squareMeter" value="m2" data-bind="checked: areaUnit">m2
-          </label>
-          <label class="btn btn-primary">
-            <input type="radio" name="options" id="cubicMeter" value="m3" data-bind="checked: areaUnit">m3
-          </label>
-        </div>-->
       </div>
 
       <div class="form-group">
@@ -119,7 +101,6 @@
   <!-- build:js scripts/vendor.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
-  <script src="/bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 

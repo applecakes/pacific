@@ -2,8 +2,7 @@
   "name": "calculator",
   "private": true,
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "seiyria-bootstrap-slider": "^9.5.3"
+    "bootstrap": "~3.3.5"
   },
   "overrides": {
     "bootstrap": {
