@@ -36,7 +36,7 @@
       <div class="form-group">
         <label for="inputCeiling" class="col-sm-3 control-label">Ceiling (m)</label>
         <div class="col-sm-3">
-          <select class="form-control" id="inputCeiling" data-bind="options: ceilingOptions, value: ceilingHeight, optionsText: ceilingText"></select>
+          <input type="number" class="form-control" id="inputCeiling" data-bind="value: ceilingHeight">
         </div>
       </div>
       <div class="form-group">
@@ -52,7 +52,7 @@
       <div class="form-group">
         <label for="inputArea" class="col-sm-3 control-label">Area (m2)</label>
         <div class="col-sm-3">
-          <select class="form-control" id="inputArea" data-bind="options: areaOptions, value: area, optionsText: areaText"></select>
+          <input type="number" class="form-control" id="inputArea" data-bind="value: area">
         </div>
       </div>
 
@@ -72,21 +72,24 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="inputPressure" class="col-sm-3 control-label">Ext. Static Pressure</label>
-        <div class="col-sm-3">
-          <div class="input-group">
-            <input type="text" class="form-control" id="inputPressure" value="0.03">
-            <div class="input-group-addon">in. of Water</div>
-          </div>
-        </div>
-      </div>
-
       <div class="panel panel-primary">
-        <div class="panel-heading">Duct Dimension</div>
+        <div class="panel-heading">Results</div>
         <div class="panel-body">
-          <p class="text-center"><strong>Center aligned text.</strong></p>
-          <p class="text-center"><strong>Center aligned text.</strong></p>
+          <div class="input-group pull-right">
+            <input type="radio" value="in" id="optionIn" autocomplete="off" data-bind="checked: resultUnit">&nbsp;in
+            <input type="radio" value="mm" id="optionMm" autocomplete="off" data-bind="checked: resultUnit">&nbsp;mm
+          </div>
+
+          <p>Duct Sq. Area: <strong data-bind="text: ductSqAreaFt"></strong><strong>ft</strong></p>
+          <p>Duct Sq. Area: <strong data-bind="text: ductSqArea"></strong><strong data-bind="text: resultUnit"></strong></p>
+          <p>Duct Diameter: <strong data-bind="text: ductDiameter"></strong><strong data-bind="text: resultUnit"></strong></p>
+          <p>Duct Dimensions:
+            <!-- ko foreach: ductDimensions -->
+            <br>
+            <strong data-bind="text: $data"></strong>
+            <!-- /ko -->
+          </p>
+          <p>Friction Rate (in H20/100ft): <strong data-bind="text: frictionRate"></strong></p>
         </div>
       </div>
 
